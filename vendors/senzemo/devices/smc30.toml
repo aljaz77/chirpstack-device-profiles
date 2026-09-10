@@ -1,0 +1,28 @@
+[device]
+id = "0c60c58c-32fb-4726-916a-f1b11b9c7cca"
+name = "SMC30 - Senstick MicroClimate"
+description = "Industrial microclimate sensor measuring temperature, relative humidity and air pressure, for indoor and outdoor use. Available with a weather shield for outdoor mounting (SMC30-OUT). Select the firmware version matching your unit: the 2026 revision (hardware 3.3, also referred to as SMC33) and the original revision (hardware 3.0) use different payload formats."
+
+[[device.firmware]]
+version = "2.1 (hardware 3.3, 2026 revision / SMC33)"
+profiles = [
+    "EU868-1_0_3.toml",
+    "US915-1_0_3.toml",
+    "AU915-1_0_3.toml",
+    "AS923-1_0_3.toml",
+]
+codec = "smc30.js"
+
+[[device.firmware]]
+version = "2.0 (hardware 3.0, original revision)"
+profiles = [
+    "EU868-1_0_3.toml",
+    "US915-1_0_3.toml",
+    "AU915-1_0_3.toml",
+    "AS923-1_0_3.toml",
+]
+codec = "smc30-pre2026.js"
+
+[device.metadata]
+product_url = "https://senzemo.com/product/indoor-microclimate-sensor/"
+documentation_url = "https://senzemo.com/documents/"
