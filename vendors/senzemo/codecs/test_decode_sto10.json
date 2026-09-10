@@ -1,0 +1,76 @@
+[
+  {
+    "name": "Real device uplink (data packet, fPort 2, 3 bytes)",
+    "input": {
+      "fPort": 2,
+      "bytes": [
+        9,
+        138,
+        249
+      ]
+    },
+    "expected": {
+      "data": {
+        "Status": "OK",
+        "Temperature": 24.42,
+        "BatteryLevel": "1776"
+      },
+      "warnings": [],
+      "errors": []
+    }
+  },
+  {
+    "name": "Real device uplink (data packet, fPort 2, 3 bytes)",
+    "input": {
+      "fPort": 2,
+      "bytes": [
+        9,
+        135,
+        247
+      ]
+    },
+    "expected": {
+      "data": {
+        "Status": "OK",
+        "Temperature": 24.39,
+        "BatteryLevel": "1769"
+      },
+      "warnings": [],
+      "errors": []
+    }
+  },
+  {
+    "name": "Alert packet",
+    "input": {
+      "fPort": 1,
+      "bytes": [
+        1
+      ]
+    },
+    "expected": {
+      "data": {
+        "Status": "Movement Detected Packet"
+      },
+      "warnings": [],
+      "errors": []
+    }
+  },
+  {
+    "name": "Shall not pass - unsupported fPort is rejected, not silently decoded",
+    "input": {
+      "fPort": 99,
+      "bytes": [
+        1,
+        2,
+        3
+      ]
+    },
+    "expected": {
+      "data": {},
+      "warnings": [],
+      "errors": [
+        "Unsupported fPort or payload length"
+      ]
+    }
+  }
+]
