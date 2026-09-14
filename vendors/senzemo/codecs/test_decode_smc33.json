@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Real device uplink (data packet, fPort 2, 8 bytes)",
+    "input": {
+      "fPort": 2,
+      "bytes": [
+        8,
+        182,
+        25,
+        207,
+        39,
+        1,
+        12,
+        6
+      ]
+    },
+    "expected": {
+      "data": {
+        "Temperature": 22.3,
+        "Humidity": 66.07,
+        "AirPressure": 998.5,
+        "Vbat": 3078
+      },
+      "warnings": [],
+      "errors": []
+    }
+  },
+  {
+    "name": "Alert packet",
+    "input": {
+      "fPort": 1,
+      "bytes": [
+        1
+      ]
+    },
+    "expected": {
+      "data": {
+        "Status": 1
+      },
+      "warnings": [],
+      "errors": []
+    }
+  },
+  {
+    "name": "Data packet without status (8 bytes)",
+    "input": {
+      "fPort": 2,
+      "bytes": [
+        9,
+        144,
+        23,
+        68,
+        38,
+        235,
+        10,
+        190
+      ]
+    },
+    "expected": {
+      "data": {
+        "Temperature": 24.48,
+        "Humidity": 59.56,
+        "AirPressure": 996.3,
+        "Vbat": 2750
+      },
+      "warnings": [],
+      "errors": []
+    }
+  },
+  {
+    "name": "Data packet with status (9 bytes)",
+    "input": {
+      "fPort": 2,
+      "bytes": [
+        0,
+        9,
+        144,
+        23,
+        68,
+        38,
+        235,
+        10,
+        190
+      ]
+    },
+    "expected": {
+      "data": {
+        "Status": 0,
+        "Temperature": 24.48,
+        "Humidity": 59.56,
+        "AirPressure": 996.3,
+        "Vbat": 2750
+      },
+      "warnings": [],
+      "errors": []
+    }
+  },
+  {
+    "name": "Data packet with negative temperature",
+    "input": {
+      "fPort": 2,
+      "bytes": [
+        254,
+        162,
+        23,
+        68,
+        38,
+        235,
+        10,
+        190
+      ]
+    },
+    "expected": {
+      "data": {
+        "Temperature": -3.5,
+        "Humidity": 59.56,
+        "AirPressure": 996.3,
+        "Vbat": 2750
+      },
+      "warnings": [],
+      "errors": []
+    }
+  },
+  {
+    "name": "Shall not pass - unsupported fPort is rejected, not silently decoded",
+    "input": {
+      "fPort": 99,
+      "bytes": [
+        1,
+        2,
+        3
+      ]
+    },
+    "expected": {
+      "data": {},
+      "warnings": [],
+      "errors": [
+        "Unsupported FPort or packet length"
+      ]
+    }
+  }
+]
