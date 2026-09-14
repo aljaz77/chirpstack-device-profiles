@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Real device uplink (data packet, fPort 2, 4 bytes)",
+    "input": {
+      "fPort": 2,
+      "bytes": [
+        29,
+        38,
+        14,
+        61
+      ]
+    },
+    "expected": {
+      "data": {
+        "Temperature": 74.62,
+        "Battery": 3645
+      },
+      "warnings": [],
+      "errors": []
+    }
+  },
+  {
+    "name": "Data packet with status (5 bytes)",
+    "input": {
+      "fPort": 2,
+      "bytes": [
+        0,
+        21,
+        149,
+        13,
+        222
+      ]
+    },
+    "expected": {
+      "data": {
+        "Status": 0,
+        "Temperature": 55.25,
+        "Battery": 3550
+      },
+      "warnings": [],
+      "errors": []
+    }
+  },
+  {
+    "name": "Shall not pass - unsupported fPort is rejected, not silently decoded",
+    "input": {
+      "fPort": 99,
+      "bytes": [
+        1,
+        2,
+        3
+      ]
+    },
+    "expected": {
+      "data": {},
+      "warnings": [],
+      "errors": [
+        "Unsupported FPort or packet length"
+      ]
+    }
+  }
+]
