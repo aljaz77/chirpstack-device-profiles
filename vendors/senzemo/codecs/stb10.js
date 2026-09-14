@@ -165,8 +165,8 @@ function map(x, in_min, in_max, out_min, out_max){
 
 // --- ChirpStack adapter. Everything above is the unmodified TTN decoder. ---
 
-// Assigned inside the decoder without a declaration; declare it here so the codec
-// does not rely on implicit globals.
+// Assigned inside the decoder without a declaration. ChirpStack evaluates codecs as
+// strict ES modules, where that throws a ReferenceError.
 var Fcnt_ret;
 
 // map() ends in toFixed() and so returns a string. ChirpStack only auto-detects

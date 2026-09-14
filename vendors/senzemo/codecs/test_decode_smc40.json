@@ -42,6 +42,39 @@
     }
   },
   {
+    "name": "Config packet (fPort 3, 9 bytes)",
+    "input": {
+      "fPort": 3,
+      "bytes": [
+        0,
+        15,
+        0,
+        0,
+        133,
+        3,
+        4,
+        40,
+        10
+      ]
+    },
+    "expected": {
+      "data": {
+        "Status": 0,
+        "SendPeriod": 15,
+        "MoveThr": 0,
+        "PacketConfirm": 0,
+        "DataRate": 5,
+        "ADRon": true,
+        "FamilyId": 3,
+        "ProductId": 4,
+        "HW": 4,
+        "FW": 1
+      },
+      "warnings": [],
+      "errors": []
+    }
+  },
+  {
     "name": "Shall not pass - unsupported fPort is rejected, not silently decoded",
     "input": {
       "fPort": 99,

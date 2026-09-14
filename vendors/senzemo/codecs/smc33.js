@@ -186,6 +186,10 @@ function decodeUplink(input) {
 
 // --- ChirpStack adapter. Everything above is the unmodified TTN decoder. ---
 
+// Assigned inside the decoder without a declaration. ChirpStack evaluates codecs as
+// strict ES modules, where that throws a ReferenceError.
+var ADRon, DataRate;
+
 // This decoder echoes unrecognised frames back as { bytes: [...] } rather than
 // reporting an error, which would surface junk frames as telemetry.
 function senstickAccepts(input)
@@ -229,6 +233,13 @@ decodeUplink = function (input)
 
   if (result && result.data)
   {
+    // Unixtime is assembled with << 24, which yields a signed 32-bit value, so
+    // timestamps from 2038 onwards would otherwise decode as negative.
+    if (result.data.Unixtime < 0)
+    {
+      result.data.Unixtime += 4294967296;
+    }
+
     return result;
   }
 
